@@ -1,5 +1,3 @@
-// $Id$
-
 #ifndef EXAMPLE_SCANNER_H
 #define EXAMPLE_SCANNER_H
 
@@ -22,7 +20,7 @@
 #undef yyFlexLexer
 #endif
 
-#include "parser.h"
+#include "parser.hh"
 
 namespace example {
 
