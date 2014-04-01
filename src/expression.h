@@ -1,6 +1,3 @@
-// $Id$
-/** \file expression.h Implements an example calculator class group. */
-
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 

@@ -1,6 +1,3 @@
-// $Id$ 	
-/** \file driver.h Declaration of the example::Driver class. */
-
 #ifndef EXAMPLE_DRIVER_H
 #define EXAMPLE_DRIVER_H
 

@@ -1,16 +1,30 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required( VERSION 2.8.0 )
 
-project(serene)
+project( serene )
 
-FIND_PACKAGE(BISON REQUIRED)
-FIND_PACKAGE(FLEX REQUIRED)
+enable_testing()
 
-file(MAKE_DIRECTORY ${serene_SOURCE_DIR}/src/generated)
-BISON_TARGET(Parser ${serene_SOURCE_DIR}/src/parser.yy ${serene_SOURCE_DIR}/src/generated/parser.cc)
-FLEX_TARGET(Scanner ${serene_SOURCE_DIR}/src/scanner.ll ${serene_SOURCE_DIR}/src/generated/scanner.cc)
-ADD_FLEX_BISON_DEPENDENCY(Scanner Parser)
+find_package( bison REQUIRED )
+find_package( flex REQUIRED )
 
-INCLUDE_DIRECTORIES(${serene_SOURCE_DIR}/src)
-INCLUDE_DIRECTORIES(${serene_SOURCE_DIR}/src/generated)
-SET(SRC_FILES ${serene_SOURCE_DIR}/src/driver.cc ${serene_SOURCE_DIR}/src/exprtest.cc ${FLEX_Scanner_OUTPUTS} ${BISON_Parser_OUTPUTS})
-ADD_EXECUTABLE (sereneTest ${SRC_FILES})
+# Create source directory for generated files
+file( MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/generated )
+
+# Define Parser and Scanner targets
+bison_target( Parser ${CMAKE_CURRENT_SOURCE_DIR}/src/parser.yy ${CMAKE_CURRENT_SOURCE_DIR}/src/generated/parser.cc )
+flex_target( Scanner ${CMAKE_CURRENT_SOURCE_DIR}/src/scanner.ll ${CMAKE_CURRENT_SOURCE_DIR}/src/generated/scanner.cc )
+add_flex_bison_dependency( Scanner Parser )
+
+# Build parser library
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src/generated )
+set( SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/driver.cc ${FLEX_Scanner_OUTPUTS} ${BISON_Parser_OUTPUTS} )
+set( TEST_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/tests/exprtest.cc )
+add_library( serene-parser STATIC ${SRC_FILES} )
+
+# Build tests
+add_executable( sereneTest ${TEST_SRC_FILES} )
+target_link_libraries( serene-parser )
+target_link_libraries( sereneTest serene-parser )
+file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/exprtest.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
+add_test( sereneTest sereneTest exprtest.txt )
