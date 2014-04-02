@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "config_ini_driver.h"
-#include "scanner.h"
+#include "config_ini_scanner.h"
 
 namespace serene {
 
@@ -17,7 +17,7 @@ bool Config_Ini_Driver::parse_stream(std::istream& in, const std::string& sname)
 {
     streamname = sname;
 
-    Scanner scanner(&in);
+    serene::Config_Ini_Scanner scanner(&in);
     scanner.set_debug(trace_scanning);
     this->lexer = &scanner;
 

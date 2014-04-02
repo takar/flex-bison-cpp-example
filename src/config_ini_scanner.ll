@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "scanner.h"
+#include "config_ini_scanner.h"
 
 /* import the parser's token type into a local typedef */
 typedef serene::Config_Ini_Parser::token token;
@@ -23,8 +23,8 @@ typedef serene::Config_Ini_Parser::token_type token_type;
 /* enable c++ scanner class generation */
 %option c++
 
-/* change the name of the scanner class. results in "ExampleFlexLexer" */
-%option prefix="Example"
+/* change the name of the scanner class. results in "ConfigIniFlexLexer" */
+%option prefix="ConfigIni"
 
 /* the manual says "somewhat more optimized" */
 %option batch
@@ -92,34 +92,34 @@ typedef serene::Config_Ini_Parser::token_type token_type;
 
 namespace serene {
 
-Scanner::Scanner(std::istream* in,
+Config_Ini_Scanner::Config_Ini_Scanner(std::istream* in,
 		 std::ostream* out)
-    : ExampleFlexLexer(in, out)
+    : ConfigIniFlexLexer(in, out)
 {
 }
 
-Scanner::~Scanner()
+Config_Ini_Scanner::~Config_Ini_Scanner()
 {
 }
 
-void Scanner::set_debug(bool b)
+void Config_Ini_Scanner::set_debug(bool b)
 {
     yy_flex_debug = b;
 }
 
 }
 
-/* This implementation of ExampleFlexLexer::yylex() is required to fill the
- * vtable of the class ExampleFlexLexer. We define the scanner's main yylex
- * function via YY_DECL to reside in the Scanner class instead. */
+/* This implementation of ConfigIniFlexLexer::yylex() is required to fill the
+ * vtable of the class ConfigIniFlexLexer. We define the scanner's main yylex
+ * function via YY_DECL to reside in the Config_Ini_Scanner class instead. */
 
 #ifdef yylex
 #undef yylex
 #endif
 
-int ExampleFlexLexer::yylex()
+int ConfigIniFlexLexer::yylex()
 {
-    std::cerr << "in ExampleFlexLexer::yylex() !" << std::endl;
+    std::cerr << "in ConfigIniFlexLexer::yylex() !" << std::endl;
     return 0;
 }
 
@@ -129,7 +129,7 @@ int ExampleFlexLexer::yylex()
  * another input file, and scanning continues. If it returns true (non-zero),
  * then the scanner terminates, returning 0 to its caller. */
 
-int ExampleFlexLexer::yywrap()
+int ConfigIniFlexLexer::yywrap()
 {
     return 1;
 }

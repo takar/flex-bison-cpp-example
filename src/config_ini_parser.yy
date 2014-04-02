@@ -75,7 +75,7 @@
 %{
 
 #include "config_ini_driver.h"
-#include "scanner.h"
+#include "config_ini_scanner.h"
 
 /* this "connects" the bison parser in the driver to the flex scanner class
  * object. it defines the yylex() function call to pull the next token from the

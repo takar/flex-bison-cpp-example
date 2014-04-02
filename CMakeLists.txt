@@ -12,7 +12,7 @@ file( MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/generated )
 
 # Define Parser and Scanner targets
 bison_target( Parser ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini_parser.yy ${CMAKE_CURRENT_SOURCE_DIR}/src/generated/config_ini_parser.cc )
-flex_target( Scanner ${CMAKE_CURRENT_SOURCE_DIR}/src/scanner.ll ${CMAKE_CURRENT_SOURCE_DIR}/src/generated/scanner.cc )
+flex_target( Scanner ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini_scanner.ll ${CMAKE_CURRENT_SOURCE_DIR}/src/generated/config_ini_scanner.cc )
 add_flex_bison_dependency( Scanner Parser )
 
 # Build parser library
