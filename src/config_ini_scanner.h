@@ -6,11 +6,11 @@
 
 #ifndef YY_DECL
 
-#define	YY_DECL						\
-    serene::Config_Ini_Parser::token_type				\
-    serene::Config_Ini_Scanner::lex(				\
-	serene::Config_Ini_Parser::semantic_type* yylval,		\
-	serene::Config_Ini_Parser::location_type* yylloc		\
+#define	YY_DECL                                             \
+    serene::Config_Ini_Parser::token_type                   \
+    serene::Config_Ini_Scanner::lex(                        \
+        serene::Config_Ini_Parser::semantic_type* yylval,   \
+        serene::Config_Ini_Parser::location_type* yylloc    \
     )
 #endif
 
