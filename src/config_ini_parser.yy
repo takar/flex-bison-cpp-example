@@ -30,7 +30,7 @@
 %name-prefix="serene"
 
 /* set the parser's class identifier */
-%define "parser_class_name" "Parser"
+%define "parser_class_name" "Config_Ini_Parser"
 
 /* keep track of the current position within the input */
 %locations
@@ -213,7 +213,7 @@ start	: /* empty */
 
 %% /*** Additional Code ***/
 
-void serene::Parser::error(const Parser::location_type& l,
+void serene::Config_Ini_Parser::error(const Config_Ini_Parser::location_type& l,
 			    const std::string& m)
 {
     driver.error(l, m);

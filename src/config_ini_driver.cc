@@ -21,7 +21,7 @@ bool Config_Ini_Driver::parse_stream(std::istream& in, const std::string& sname)
     scanner.set_debug(trace_scanning);
     this->lexer = &scanner;
 
-    Parser parser(*this);
+    serene::Config_Ini_Parser parser(*this);
     parser.set_debug_level(trace_parsing);
     return (parser.parse() == 0);
 }

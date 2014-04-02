@@ -5,8 +5,8 @@
 #include "scanner.h"
 
 /* import the parser's token type into a local typedef */
-typedef serene::Parser::token token;
-typedef serene::Parser::token_type token_type;
+typedef serene::Config_Ini_Parser::token token;
+typedef serene::Config_Ini_Parser::token_type token_type;
 
 /* By default yylex returns int, we use token_type. Unfortunately yyterminate
  * by default returns 0, which is not of token_type. */
