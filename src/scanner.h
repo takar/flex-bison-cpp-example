@@ -1,5 +1,5 @@
-#ifndef EXAMPLE_SCANNER_H
-#define EXAMPLE_SCANNER_H
+#ifndef __SERENE_CONFIG_SCANNER_H__
+#define __SERENE_CONFIG_SCANNER_H__
 
 // Flex expects the signature of yylex to be defined in the macro YY_DECL, and
 // the C++ parser expects it to be declared. We can factor both as follows.
@@ -7,10 +7,10 @@
 #ifndef YY_DECL
 
 #define	YY_DECL						\
-    example::Parser::token_type				\
-    example::Scanner::lex(				\
-	example::Parser::semantic_type* yylval,		\
-	example::Parser::location_type* yylloc		\
+    serene::Parser::token_type				\
+    serene::Scanner::lex(				\
+	serene::Parser::semantic_type* yylval,		\
+	serene::Parser::location_type* yylloc		\
     )
 #endif
 
@@ -22,7 +22,7 @@
 
 #include "parser.hh"
 
-namespace example {
+namespace serene {
 
 /** Scanner is a derived class to add some extra function to the scanner
  * class. Flex itself creates a class named yyFlexLexer, which is renamed using
@@ -53,6 +53,6 @@ public:
     void set_debug(bool b);
 };
 
-} // namespace example
+} // namespace serene
 
-#endif // EXAMPLE_SCANNER_H
+#endif // __SERENE_CONFIG_SCANNER_H__

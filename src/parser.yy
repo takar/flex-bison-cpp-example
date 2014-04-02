@@ -27,7 +27,7 @@
 %skeleton "lalr1.cc"
 
 /* namespace to enclose parser in */
-%name-prefix="example"
+%name-prefix="serene"
 
 /* set the parser's class identifier */
 %define "parser_class_name" "Parser"
@@ -43,7 +43,7 @@
 /* The driver is passed by reference to the parser and to the scanner. This
  * provides a simple but effective pure interface, not relying on global
  * variables. */
-%parse-param { class Driver& driver }
+%parse-param { class Config_Ini_Driver& driver }
 
 /* verbose error messages */
 %error-verbose
@@ -74,7 +74,7 @@
 
 %{
 
-#include "driver.h"
+#include "config_ini_driver.h"
 #include "scanner.h"
 
 /* this "connects" the bison parser in the driver to the flex scanner class
@@ -213,7 +213,7 @@ start	: /* empty */
 
 %% /*** Additional Code ***/
 
-void example::Parser::error(const Parser::location_type& l,
+void serene::Parser::error(const Parser::location_type& l,
 			    const std::string& m)
 {
     driver.error(l, m);

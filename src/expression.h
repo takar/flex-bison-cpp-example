@@ -1,5 +1,5 @@
-#ifndef EXPRESSION_H
-#define EXPRESSION_H
+#ifndef __SERENE_CONFIG_EXPRESSION_H__
+#define __SERENE_CONFIG_EXPRESSION_H__
 
 #include <map>
 #include <vector>
@@ -292,7 +292,7 @@ public:
 };
 
 /** Calculator context used to save the parsed expressions. This context is
- * passed along to the example::Driver class and fill during parsing via bison
+ * passed along to the serene::Config_Ini_Driver class and fill during parsing via bison
  * actions. */
 class CalcContext
 {
@@ -342,4 +342,4 @@ public:
     }
 };
 
-#endif // EXPRESSION_H
+#endif // __SERENE_CONFIG_EXPRESSION_H__
