@@ -71,6 +71,6 @@ start : /* empty */
 
 void
 serene::ConfigIniParser::error(const ConfigIniParser::location_type& l,
-                                    const std::string& m) {
+                               const std::string& m) {
     driver.error(l, m);
 }

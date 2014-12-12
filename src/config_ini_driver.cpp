@@ -4,13 +4,12 @@
 #include "config_ini_driver.h"
 #include "config_ini_scanner.h"
 
-namespace serene {
-
-ConfigIniDriver::ConfigIniDriver()
+serene::ConfigIniDriver::ConfigIniDriver()
     : trace_scanning(false), trace_parsing(false) { }
 
 bool
-ConfigIniDriver::parse_stream(std::istream& in, const std::string& sname) {
+serene::ConfigIniDriver::parse_stream(std::istream& in,
+                                      const std::string& sname) {
     streamname = sname;
 
     serene::ConfigIniScanner scanner(&in);
@@ -23,33 +22,24 @@ ConfigIniDriver::parse_stream(std::istream& in, const std::string& sname) {
 }
 
 bool
-ConfigIniDriver::parse_file(const std::string &filename) {
-    std::ifstream in(filename.c_str());
-    if (!in.good()) return false;
-    return parse_stream(in, filename);
-}
-
-bool
-ConfigIniDriver::parse_string(const std::string &input,
-                              const std::string& sname) {
+serene::ConfigIniDriver::parse_string(const std::string &input,
+                                      const std::string& sname) {
     std::istringstream iss(input);
     return parse_stream(iss, sname);
 }
 
 void
-ConfigIniDriver::print(int i) {
+serene::ConfigIniDriver::print(int i) {
     std::cout << "Got an int: " << i << std::endl;
 }
 
 void
-ConfigIniDriver::error(const class location& loc,
+serene::ConfigIniDriver::error(const class location& loc,
         const std::string& msg) {
     std::cerr << loc << ": " << msg << std::endl;
 }
 
 void
-ConfigIniDriver::error(const std::string& msg) {
+serene::ConfigIniDriver::error(const std::string& msg) {
     std::cerr << msg << std::endl;
 }
-
-} // namespace serene

@@ -24,8 +24,6 @@ class ConfigIniDriver
         bool parse_string(const std::string& input,
                           const std::string& sname = "string stream");
 
-        bool parse_file(const std::string& filename);
-
         void print(int i);
 
         void error(const class location& l, const std::string& m);

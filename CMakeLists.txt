@@ -8,7 +8,7 @@ find_package( bison REQUIRED )
 find_package( flex REQUIRED )
 
 # Define Parser and Scanner targets
-bison_target( Parser ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini_parser.yy ${CMAKE_CURRENT_BINARY_DIR}/config_ini_parser.cpp )
+bison_target( Parser ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini_parser.yy ${CMAKE_CURRENT_BINARY_DIR}/config_ini_parser.cpp)
 flex_target( Scanner ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini_scanner.ll ${CMAKE_CURRENT_BINARY_DIR}/config_ini_scanner.cpp )
 add_flex_bison_dependency( Scanner Parser )
 
