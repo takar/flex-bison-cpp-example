@@ -1,4 +1,5 @@
 #include <fstream>
+#include <map>
 #include <sstream>
 
 #include "config_ini_driver.h"
@@ -29,8 +30,9 @@ serene::ConfigIniDriver::parse_string(const std::string &input,
 }
 
 void
-serene::ConfigIniDriver::print(int i) {
-    std::cout << "Got an int: " << i << std::endl;
+serene::ConfigIniDriver::statement(const std::string& key, int value) {
+    std::cout << "key: " << key << ", value: " << value << std::endl;
+    data.insert(std::make_pair(key, value));
 }
 
 void

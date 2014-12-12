@@ -53,6 +53,11 @@ typedef serene::ConfigIniParser::token_type token_type;
     yylloc->step();
 %}
 
+[a-zA-Z_]+[a-zA-Z_0-9]* {
+    yylval->stringVal = new std::string(yytext, yyleng);
+    return token::STRING;
+}
+
 \-?[0-9]+ {
     yylval->integerVal = atoi(yytext);
     return token::INTEGER;

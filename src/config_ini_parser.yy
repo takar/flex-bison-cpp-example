@@ -38,11 +38,15 @@
 
 %union {
     int                integerVal;
+    std::string*       stringVal;
 }
 
 %token                 END      0    "end of file"
 %token                 EOL           "end of line"
 %token <integerVal>    INTEGER       "integer"
+%token <stringVal>     STRING        "string"
+
+%destructor { delete $$; } STRING
 
 %{
 
@@ -58,13 +62,13 @@
 
 start : /* empty */
     | start EOL
-    | start INTEGER EOL
+    | start STRING '=' INTEGER EOL
     {
-         driver.print($2);
+         driver.statement(*$2, $4);
     }
-    | start INTEGER END
+    | start STRING '=' INTEGER END
     {
-         driver.print($2);
+         driver.statement(*$2, $4);
     }
 
 %% /*** Additional Code ***/
