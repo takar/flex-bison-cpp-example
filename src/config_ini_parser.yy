@@ -25,8 +25,8 @@
 /* keep track of the current position within the input */
 %locations
 
-/* The driver is passed by reference to the parser and to the scanner. */
-%parse-param { class ConfigIniDriver& driver }
+/* The config class is passed by reference to the parser and to the scanner. */
+%parse-param { class ConfigIni& config_ini }
 
 /* verbose error messages */
 %error-verbose
@@ -45,11 +45,11 @@
 
 %{
 
-#include "config_ini_driver.h"
+#include "config_ini.h"
 #include "config_ini_scanner.h"
 
 #undef yylex
-#define yylex driver.scanner->lex
+#define yylex config_ini.scanner->lex
 
 %}
 
@@ -59,11 +59,11 @@ start : /* empty */
     | start EOL
     | start STRING '=' INTEGER EOL
     {
-         driver.statement(*$2, $4);
+         config_ini.statement(*$2, $4);
     }
     | start STRING '=' INTEGER END
     {
-         driver.statement(*$2, $4);
+         config_ini.statement(*$2, $4);
     }
 
 %% /*** Additional Code ***/
@@ -71,5 +71,5 @@ start : /* empty */
 void
 serene::ConfigIniParser::error(const ConfigIniParser::location_type& l,
                                const std::string& m) {
-    driver.error(l, m);
+    config_ini.error(l, m);
 }

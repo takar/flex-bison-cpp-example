@@ -15,7 +15,7 @@ add_flex_bison_dependency( Scanner Parser )
 # Build parser library
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src )
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
-set( SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini_driver.cpp ${FLEX_Scanner_OUTPUTS} ${BISON_Parser_OUTPUTS} )
+set( SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/config_ini.cpp ${FLEX_Scanner_OUTPUTS} ${BISON_Parser_OUTPUTS} )
 set( TEST_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_config_ini.cpp )
 add_library( serene-parser STATIC ${SRC_FILES} )
 

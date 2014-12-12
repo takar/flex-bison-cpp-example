@@ -1,5 +1,5 @@
-#ifndef __SERENE_CONFIG_INI_DRIVER_H__
-#define __SERENE_CONFIG_INI_DRIVER_H__
+#ifndef __SERENE_CONFIG_INI_H__
+#define __SERENE_CONFIG_INI_H__
 
 #include <map>
 #include <string>
@@ -8,11 +8,11 @@ namespace serene {
 
 class ConfigIniScanner;
 
-class ConfigIniDriver {
+class ConfigIni {
  public:
     typedef std::map<std::string, int> data_t;
 
-    ConfigIniDriver();
+    ConfigIni();
 
     bool trace_scanning;
 
@@ -36,4 +36,4 @@ class ConfigIniDriver {
 
 }  // namespace serene
 
-#endif // __SERENE_CONFIG_INI_DRIVER_H__
+#endif // __SERENE_CONFIG_INI_H__
