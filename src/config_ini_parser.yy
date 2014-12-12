@@ -24,11 +24,6 @@
 
 /* keep track of the current position within the input */
 %locations
-%initial-action
-{
-    // initialize the initial location object
-    @$.begin.filename = @$.end.filename = &driver.streamname;
-};
 
 /* The driver is passed by reference to the parser and to the scanner. */
 %parse-param { class ConfigIniDriver& driver }

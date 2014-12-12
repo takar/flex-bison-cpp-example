@@ -10,19 +10,17 @@ class ConfigIniScanner;
 
 class ConfigIniDriver {
  public:
+    typedef std::map<std::string, int> data_t;
+
     ConfigIniDriver();
 
     bool trace_scanning;
 
     bool trace_parsing;
 
-    std::string streamname;
+    data_t parse_stream(std::istream& in);
 
-    bool parse_stream(std::istream& in,
-                      const std::string& sname = "stream input");
-
-    bool parse_string(const std::string& input,
-                      const std::string& sname = "string stream");
+    data_t parse_string(const std::string& input);
 
     void statement(const std::string& key, int value);
 
@@ -33,9 +31,9 @@ class ConfigIniDriver {
     class ConfigIniScanner* scanner;
 
  private:
-    std::map<std::string, int> data;
+    data_t data_;
 };
 
-} // namespace serene
+}  // namespace serene
 
 #endif // __SERENE_CONFIG_INI_DRIVER_H__

@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <fstream>
 #include <map>
 #include <sstream>
@@ -8,31 +9,29 @@
 serene::ConfigIniDriver::ConfigIniDriver()
     : trace_scanning(false), trace_parsing(false) { }
 
-bool
-serene::ConfigIniDriver::parse_stream(std::istream& in,
-                                      const std::string& sname) {
-    streamname = sname;
-
+serene::ConfigIniDriver::data_t
+serene::ConfigIniDriver::parse_stream(std::istream& in) {
     serene::ConfigIniScanner scanner(&in);
     scanner.set_debug(trace_scanning);
     this->scanner = &scanner;
 
     serene::ConfigIniParser parser(*this);
     parser.set_debug_level(trace_parsing);
-    return (parser.parse() == 0);
+    assert(parser.parse() == 0);
+    return data_;
 }
 
-bool
-serene::ConfigIniDriver::parse_string(const std::string &input,
-                                      const std::string& sname) {
+serene::ConfigIniDriver::data_t
+serene::ConfigIniDriver::parse_string(const std::string &input) {
     std::istringstream iss(input);
-    return parse_stream(iss, sname);
+    return parse_stream(iss);
 }
 
 void
-serene::ConfigIniDriver::statement(const std::string& key, int value) {
-    std::cout << "key: " << key << ", value: " << value << std::endl;
-    data.insert(std::make_pair(key, value));
+serene::ConfigIniDriver::statement(const std::string& identifier, int value) {
+    std::cout << "identifier: " << identifier << ", "
+                 "value: " << value << std::endl;
+    data_.insert(std::make_pair(identifier, value));
 }
 
 void
