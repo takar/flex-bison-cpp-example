@@ -2,9 +2,6 @@
 #define __SERENE_CONFIG_INI_DRIVER_H__
 
 #include <string>
-#include <vector>
-
-class CalcContext;
 
 namespace serene {
 
@@ -13,7 +10,7 @@ class ConfigIniScanner;
 class ConfigIniDriver
 {
     public:
-        ConfigIniDriver(class CalcContext& calc);
+        ConfigIniDriver();
 
         bool trace_scanning;
 
@@ -29,13 +26,13 @@ class ConfigIniDriver
 
         bool parse_file(const std::string& filename);
 
+        void print(int i);
+
         void error(const class location& l, const std::string& m);
 
         void error(const std::string& m);
 
-        class ConfigIniScanner* lexer;
-
-        class CalcContext& calc;
+        class ConfigIniScanner* scanner;
 };
 
 } // namespace serene

@@ -6,8 +6,8 @@
 
 namespace serene {
 
-ConfigIniDriver::ConfigIniDriver(class CalcContext& _calc)
-    : trace_scanning(false), trace_parsing(false), calc(_calc) { }
+ConfigIniDriver::ConfigIniDriver()
+    : trace_scanning(false), trace_parsing(false) { }
 
 bool
 ConfigIniDriver::parse_stream(std::istream& in, const std::string& sname) {
@@ -15,7 +15,7 @@ ConfigIniDriver::parse_stream(std::istream& in, const std::string& sname) {
 
     serene::ConfigIniScanner scanner(&in);
     scanner.set_debug(trace_scanning);
-    this->lexer = &scanner;
+    this->scanner = &scanner;
 
     serene::ConfigIniParser parser(*this);
     parser.set_debug_level(trace_parsing);
@@ -37,14 +37,19 @@ ConfigIniDriver::parse_string(const std::string &input,
 }
 
 void
-ConfigIniDriver::error(const class location& l,
-        const std::string& m) {
-    std::cerr << l << ": " << m << std::endl;
+ConfigIniDriver::print(int i) {
+    std::cout << "Got an int: " << i << std::endl;
 }
 
 void
-ConfigIniDriver::error(const std::string& m) {
-    std::cerr << m << std::endl;
+ConfigIniDriver::error(const class location& loc,
+        const std::string& msg) {
+    std::cerr << loc << ": " << msg << std::endl;
+}
+
+void
+ConfigIniDriver::error(const std::string& msg) {
+    std::cerr << msg << std::endl;
 }
 
 } // namespace serene

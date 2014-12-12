@@ -53,9 +53,7 @@ typedef serene::ConfigIniParser::token_type token_type;
     yylloc->step();
 %}
 
- /*** BEGIN EXAMPLE - Change the example lexer rules below ***/
-
-[0-9]+ {
+\-?[0-9]+ {
     yylval->integerVal = atoi(yytext);
     return token::INTEGER;
 }
@@ -76,45 +74,24 @@ typedef serene::ConfigIniParser::token_type token_type;
     return static_cast<token_type>(*yytext);
 }
 
- /*** END EXAMPLE - Change the example lexer rules above ***/
-
 %% /*** Additional Code ***/
 
-namespace serene {
+serene::ConfigIniScanner::ConfigIniScanner(std::istream* in,
+    std::ostream* out) : ConfigIniFlexLexer(in, out) { }
 
-ConfigIniScanner::ConfigIniScanner(std::istream* in,
-                                   std::ostream* out)
-    : ConfigIniFlexLexer(in, out) {
-}
-
-ConfigIniScanner::~ConfigIniScanner() {
-}
-
-void ConfigIniScanner::set_debug(bool b) {
+void
+serene::ConfigIniScanner::set_debug(bool b) {
     yy_flex_debug = b;
 }
-
-}
-
-/* This implementation of ConfigIniFlexLexer::yylex() is required to fill the
- * vtable of the class ConfigIniFlexLexer. We define the scanner's main yylex
- * function via YY_DECL to reside in the ConfigIniScanner class instead. */
 
 #ifdef yylex
 #undef yylex
 #endif
 
-int ConfigIniFlexLexer::yylex()
-{
+int ConfigIniFlexLexer::yylex() {
     std::cerr << "in ConfigIniFlexLexer::yylex() !" << std::endl;
     return 0;
 }
-
-/* When the scanner receives an end-of-file indication from YY_INPUT, it then
- * checks the yywrap() function. If yywrap() returns false (zero), then it is
- * assumed that the function has gone ahead and set up `yyin' to point to
- * another input file, and scanning continues. If it returns true (non-zero),
- * then the scanner terminates, returning 0 to its caller. */
 
 int ConfigIniFlexLexer::yywrap()
 {

@@ -2,7 +2,7 @@
 #define __SERENE_CONFIG_INI_SCANNER_H__
 
 #ifndef YY_DECL
-# define YY_DECL                                           \
+# define YY_DECL                                          \
     serene::ConfigIniParser::token_type                   \
     serene::ConfigIniScanner::lex(                        \
         serene::ConfigIniParser::semantic_type* yylval,   \
@@ -26,7 +26,7 @@ class ConfigIniScanner : public ConfigIniFlexLexer
     ConfigIniScanner(std::istream* arg_yyin = 0,
                      std::ostream* arg_yyout = 0);
 
-    virtual ~ConfigIniScanner();
+    virtual ~ConfigIniScanner() { };
 
     virtual ConfigIniParser::token_type lex(
         ConfigIniParser::semantic_type* yylval,
