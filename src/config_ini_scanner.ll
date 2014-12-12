@@ -5,8 +5,8 @@
 #include "config_ini_scanner.h"
 
 /* import the parser's token type into a local typedef */
-typedef serene::Config_Ini_Parser::token token;
-typedef serene::Config_Ini_Parser::token_type token_type;
+typedef serene::ConfigIniParser::token token;
+typedef serene::ConfigIniParser::token_type token_type;
 
 /* By default yylex returns int, we use token_type. Unfortunately yyterminate
  * by default returns 0, which is not of token_type. */
@@ -34,7 +34,7 @@ typedef serene::Config_Ini_Parser::token_type token_type;
 %option debug
 
 /* no support for include files is planned */
-%option yywrap nounput 
+%option yywrap nounput
 
 /* enables the use of start condition stacks */
 %option stack
@@ -60,16 +60,6 @@ typedef serene::Config_Ini_Parser::token_type token_type;
     return token::INTEGER;
 }
 
-[0-9]+"."[0-9]* {
-    yylval->doubleVal = atof(yytext);
-    return token::DOUBLE;
-}
-
-[A-Za-z][A-Za-z0-9_,.-]* {
-    yylval->stringVal = new std::string(yytext, yyleng);
-    return token::STRING;
-}
-
  /* gobble up white-spaces */
 [ \t\r]+ {
     yylloc->step();
@@ -92,18 +82,15 @@ typedef serene::Config_Ini_Parser::token_type token_type;
 
 namespace serene {
 
-Config_Ini_Scanner::Config_Ini_Scanner(std::istream* in,
-		 std::ostream* out)
-    : ConfigIniFlexLexer(in, out)
-{
+ConfigIniScanner::ConfigIniScanner(std::istream* in,
+                                   std::ostream* out)
+    : ConfigIniFlexLexer(in, out) {
 }
 
-Config_Ini_Scanner::~Config_Ini_Scanner()
-{
+ConfigIniScanner::~ConfigIniScanner() {
 }
 
-void Config_Ini_Scanner::set_debug(bool b)
-{
+void ConfigIniScanner::set_debug(bool b) {
     yy_flex_debug = b;
 }
 
@@ -111,7 +98,7 @@ void Config_Ini_Scanner::set_debug(bool b)
 
 /* This implementation of ConfigIniFlexLexer::yylex() is required to fill the
  * vtable of the class ConfigIniFlexLexer. We define the scanner's main yylex
- * function via YY_DECL to reside in the Config_Ini_Scanner class instead. */
+ * function via YY_DECL to reside in the ConfigIniScanner class instead. */
 
 #ifdef yylex
 #undef yylex

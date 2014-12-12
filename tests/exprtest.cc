@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     CalcContext calc;
-    serene::Config_Ini_Driver driver(calc);
+    serene::ConfigIniDriver driver(calc);
     bool readfile = false;
 
     for(int ai = 1; ai < argc; ++ai)
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     }
 
     if (readfile) return 0;
-    
+
     std::cout << "Reading expressions from stdin" << std::endl;
 
     std::string line;

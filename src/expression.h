@@ -1,5 +1,5 @@
-#ifndef __SERENE_CONFIG_EXPRESSION_H__
-#define __SERENE_CONFIG_EXPRESSION_H__
+#ifndef __SERENE_CONFIG_INI_EXPRESSION_H__
+#define __SERENE_CONFIG_INI_EXPRESSION_H__
 
 #include <map>
 #include <vector>
@@ -38,7 +38,7 @@ class CNConstant : public CalcNode
 {
     /// the constant value returned
     double	value;
-    
+
 public:
     /// construct a constant calculation node from a value
     explicit CNConstant(double _value)
@@ -94,7 +94,7 @@ class CNAdd : public CalcNode
 
     /// right calculation operand
     CalcNode* 	right;
-    
+
 public:
     explicit CNAdd(CalcNode* _left, CalcNode* _right)
 	: CalcNode(), left(_left), right(_right)
@@ -128,7 +128,7 @@ class CNSubtract : public CalcNode
 
     /// right calculation operand
     CalcNode* 	right;
-    
+
 public:
     explicit CNSubtract(CalcNode* _left, CalcNode* _right)
 	: CalcNode(), left(_left), right(_right)
@@ -162,7 +162,7 @@ class CNMultiply : public CalcNode
 
     /// right calculation operand
     CalcNode* 	right;
-    
+
 public:
     explicit CNMultiply(CalcNode* _left, CalcNode* _right)
 	: CalcNode(), left(_left), right(_right)
@@ -196,7 +196,7 @@ class CNDivide : public CalcNode
 
     /// right calculation operand
     CalcNode* 	right;
-    
+
 public:
     explicit CNDivide(CalcNode* _left, CalcNode* _right)
 	: CalcNode(), left(_left), right(_right)
@@ -231,7 +231,7 @@ class CNModulo : public CalcNode
 
     /// right calculation operand
     CalcNode* 	right;
-    
+
 public:
     explicit CNModulo(CalcNode* _left, CalcNode* _right)
 	: CalcNode(), left(_left), right(_right)
@@ -265,7 +265,7 @@ class CNPower : public CalcNode
 
     /// right calculation operand
     CalcNode* 	right;
-    
+
 public:
     explicit CNPower(CalcNode* _left, CalcNode* _right)
 	: CalcNode(), left(_left), right(_right)
@@ -292,7 +292,7 @@ public:
 };
 
 /** Calculator context used to save the parsed expressions. This context is
- * passed along to the serene::Config_Ini_Driver class and fill during parsing via bison
+ * passed along to the serene::ConfigIniDriver class and fill during parsing via bison
  * actions. */
 class CalcContext
 {
@@ -329,7 +329,7 @@ public:
     {
 	return variables.find(varname) != variables.end();
     }
-    
+
     /// return the given variable from the storage. throws an exception if it
     /// does not exist.
     double	getVariable(const std::string &varname) const
