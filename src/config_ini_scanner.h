@@ -16,7 +16,7 @@
 # undef yyFlexLexer
 #endif
 
-#include "config_ini_parser.hh"
+#include "config_ini_parser.hpp"
 
 namespace serene {
 
